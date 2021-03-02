@@ -1,34 +1,28 @@
-const http  = require('http')
-const https = require('https')
-
 
 module.exports = {
-   
-    request :  function onclientRequest(method , protocal , host , port , path ){
+   request
+
+
+}  
+    function request(method , protocal , host , port , path , data = ' ',headers){
         console.log(host , port , method , path , protocal)
         
-        
-    if(method === 'GET' && protocal === 'http' && host === 'localhost' && port === 9818 && path === '/hi'){
-        console.log(`Hello on Get`)
-    }
-    if(method === 'POST' && protocal === 'http' && host === 'localhost' && port === 9818 && path === '/hi'){
-        console.log(`Hello on Post`)
-    }
-   // console.log(host , port , method , path , protocal)
-    
-    
-    if(method === 'GET' && protocal === 'https' && host === 'covid19.th-stat.com' && port === 443 && path === '/api/open/today'){
-        console.log(test)   
-        const options = {
-            host: 'covid19.th-stat.com',
-            port: 443,
-            method: 'GET',
-            path: '/api/open/today',
-        }
-       let req = https.request( options , (resp) => {  
+        let payload  = convertJsontoString(data)  // check data ที่เข้ามาว่าเป็น string หรือไม่ 
 
-        let respdata = ``
-       //resp.setEncoding('utf8')    // If response data use UTF-8 encoding such as thai lang
+        let schema = protocal === 'https' ? require('https') : require('http') 
+        
+        const options = {
+            host: host,
+            port: port,
+            method: method,
+            path: path,
+            headers : headers !== null && headers !== undefined ? headers : {'content-Type' : 'application/json; charset=utf-8'} // javascript object
+
+        }
+       let req = schema.request( options , (resp) => {  
+
+        let respdata = ''
+        resp.setEncoding('utf8')  
     
         resp.on(`data`,(chunk) => {
             respdata += chunk.toString()
@@ -42,6 +36,7 @@ module.exports = {
 
     
     })
+    req.write(payload)
     req.end()
 
     function convertStringtoJSON(data)
@@ -53,7 +48,15 @@ module.exports = {
                 }
         }
    
+    function convertJsontoString(data)
+        {
+            try{  
+                return JSON.stringify(data)
+            }catch(excp){  
+                return data 
+                }
+        }
     
+
 }
-}
-}  
+
