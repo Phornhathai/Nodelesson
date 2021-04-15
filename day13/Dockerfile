@@ -6,7 +6,7 @@ COPY . .
 
 RUN npm install
 
-ENTRYPOINT ("node" , "app.js")
+ENTRYPOINT ["node" , "app.js"]
 
 
 
