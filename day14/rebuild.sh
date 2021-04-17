@@ -14,5 +14,5 @@ sudo docker run --name $CONTAINER_NAME \
         --restart=always \
         --link mongo:db \
         -p $PUB_PORT:7774 \
-        -d node-day13-img:latest
+        -d $IMG_NAME:$TAG_NAME
 
