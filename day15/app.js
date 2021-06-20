@@ -5,7 +5,7 @@ async function main(){
     try{
         let servfile = await ss.serv('/static/index.htm')
         console.log(servfile)
-        //response.write(servfile)
+        response.write(servfile)
     } catch(error){
         console.log(error)
     }
