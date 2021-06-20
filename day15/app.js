@@ -1,11 +1,20 @@
 
 const ss = require('./lib/ServStatic')
 
-(async function(){
-    let servfile = await ss.serv('/static/index.htm')
-})()
+async function main(){
+    try{
+        let servfile = await ss.serv('/static/index.htm')
+        console.log(servfile)
+        //response.write(servfile)
+    } catch(error){
+        console.log(error)
+    }
+    
+}
 
-response.write(servfile)
+main().then()
+
+
 
 
 
