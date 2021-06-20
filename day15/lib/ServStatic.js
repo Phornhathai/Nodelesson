@@ -7,13 +7,13 @@ const fs = require('fs')
 const PORT = process.env.PORT || 9761
 // --------------------------------------------------
 
-let server = http.createServer( onListenner )
+let server = http.createServer( serv )
 server.listen(PORT)
 console.log('Server Start at ' + PORT)
 
 // --------------------------------------------------
 
-function serv(request,response){
+async function serv(request,response){
     let fullpath
     // console.log( process.cwd() + request.url )
      console.log(request.url)

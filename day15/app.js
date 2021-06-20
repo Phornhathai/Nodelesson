@@ -1,8 +1,10 @@
 
 const ss = require('./lib/ServStatic')
 
-let servfile = await ss.serv( fullpath )
- 
+(async function(){
+    let servfile = await ss.serv('/static/index.htm')
+})()
+
 response.write(servfile)
 
 
