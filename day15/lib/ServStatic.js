@@ -1,15 +1,6 @@
 module.exports = {
     serv
 }
-const http = require('http')
-const fs = require('fs')
-// --------------------------------------------------
-const PORT = process.env.PORT || 9761
-// --------------------------------------------------
-
-let server = http.createServer( serv )
-server.listen(PORT)
-console.log('Server Start at ' + PORT)
 
 // --------------------------------------------------
 function serv(request,response){
