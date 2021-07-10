@@ -11,8 +11,34 @@ console.log('Server Start at ' + PORT)
 async function main(request,response){
     try{
         let servfile = await ss.serv(request)   //ส่งค่ากลับด้วย await ด้วย function promise 
-        console.log(servfile)
-        response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8'} )
+        let url = servfile.fullpath
+       // console.log("servfile" ,  servfile)
+        if(servfile.status === true){
+        url = (url.split('.')[1])
+        // request.url = /  <<<< split '.' ???? <<<<<<  [ '/' ]  <<<<<< [0]
+       // console.log(url)
+        let data = {
+            css : "text/css",
+            image : "image/jpeg",
+            htm : "text/html",
+            html : "text/html",
+            jpg : "image/jpeg",
+            jpeg : "image/jpeg",
+            ico : "image/x-icon"
+
+        }
+        // css -> text/css
+        // htm -> text/html
+        // html -> text/html
+        // jpg -> image/jpeg
+        // jpeg -> image/jpeg
+        // ico  -> image/x-icon
+            response.writeHead(200, {'Content-Type' : data[url] })
+        }else{
+            response.writeHead(404, {'Content-Type' : 'text/plain'})
+            response.write('404 not found')
+        }
+      
         response.write(servfile["data"])
     } catch(error){
         console.log(error)

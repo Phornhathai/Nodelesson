@@ -19,7 +19,7 @@ function serv(request){
            }else{
               result["status"] = true
               result["data"] = data
-             
+              result["fullpath"] = fullpath
            }
            resolve(result) 
        })
