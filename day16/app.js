@@ -1,5 +1,4 @@
 const http = require('http')
-const { stringify } = require('querystring')
 const ss = require('./lib/ServStatic')
 // --------------------------------------------------
 const PORT = process.env.PORT || 9761
@@ -11,7 +10,7 @@ console.log('Server Start at ' + PORT)
 
 async function main(request,response){
     try{
-        let servfile = await ss.serv(request)
+        let servfile = await ss.serv(request)   //ส่งค่ากลับด้วย await ด้วย function promise 
         console.log(servfile)
         response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8'} )
         response.write(servfile["data"])
